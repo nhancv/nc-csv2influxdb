@@ -11,7 +11,7 @@ Usage
 Generate `import.txt` file:
 
 ```
-python csv_to_line.py
+python csv2line.py -d <dbname> -i <inputfile> -o <outputfile>
 ```
 
 Import to InfluxDB
