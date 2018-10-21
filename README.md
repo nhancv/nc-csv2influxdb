@@ -12,6 +12,9 @@ Generate `import.txt` file:
 
 ```
 python csv2line.py -d <dbname> -i <inputfile> -o <outputfile>
+
+ex:
+python csv2line.py -d retail1 -i data.csv -o import.txt
 ```
 
 Import to InfluxDB
