@@ -28,7 +28,7 @@ Verify
 $influx
 > use retail1
 > precision rfc3339
-> select * from price limit 3
+> select * from transaction limit 3
 ```
 
 Delete all measurement
