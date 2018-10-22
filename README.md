@@ -36,6 +36,8 @@ Delete all measurement
 > drop series from /.*/
 ```
 
+
+
 ---------
 ## NOTE
 
@@ -58,6 +60,8 @@ Ex:
 weather,location=us-midwest temp_str="too hot",out=false 1465839830100400201
 ```
 
+![line_protocol_reference_quoting](img/line_protocol_reference_quoting.png)
+
 ---------
 ## EVALUATION
 
@@ -72,7 +76,7 @@ Convert to Line protocol: import.txt (159.4MB) take 300 seconds
 
 Import to InfluxDB take 53 seconds
 
-![Preview](screenshots/influxdb_import_1milrow.png)
+![influxdb_import_1milrow](img/influxdb_import_1milrow.png)
 
 ### EXAMPLE QUERY: 
 ```

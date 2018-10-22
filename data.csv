@@ -1,4 +1,5 @@
-brand,model,quantity,price,store,area,username,user_age,user_gender,created_at
-sony,XA1,1,5927,9,HCM,TXQB,54,Female,2018-03-12 4:24:12
-sony,XA1,5,6104,2,Ha Noi,JWAY,40,Female,2018-01-09 23:57:51
+brand,model,quantity,price,store,area,user_name,user_age,user_gender,time
+"sony","L2","5","2274","2","Ha Noi","Brooklyn517","59","Female","1460040033000000000"
+"sony","XA1","3","4647","7","Khanh Hoa","Wayne4","51","Female","1430494365000000000"
+
 

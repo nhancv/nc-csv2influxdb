@@ -47,19 +47,18 @@ def convert(dbname, inputfile, outputfile):
     df_full = pd.read_csv(inputfile)
     df_full["measurement"] = ['transaction' for t in range(len(df_full))]
     lines = [str(df_full["measurement"][d])
-             + ",brand=" + str(df_full["brand"][d])
+             + ",brand=" + str(df_full["brand"][d]).replace(" ", "_")
+             + ",model=" + str(df_full["model"][d]).replace(" ", "_")
+             + ",area=" + str(df_full["area"][d]).replace(" ", "_")
+             + ",user_name=" + str(df_full["user_name"][d]).replace(" ", "_")
+             + ",user_gender=" + str(df_full["user_gender"][d]).replace(" ", "_")
              + " "
-             + "model=\"" + str(df_full["model"][d]) + "\","
-             + "quantity=" + str(df_full["quantity"][d]) + ","
-             + "price=" + str(df_full["price"][d]) + ","
-             + "store=\"" + str(df_full["store"][d]) + "\","
-             + "area=\"" + str(df_full["area"][d]) + "\","
-             + "username=\"" + str(df_full["username"][d]) + "\","
-             + "user_age=" + str(df_full["user_age"][d]) + ","
-             + "user_gender=\"" + str(df_full["user_gender"][d]) + "\""
+             + "quantity=" + str(df_full["quantity"][d])
+             + ",store=" + str(df_full["store"][d])
+             + ",price=" + str(df_full["price"][d])
+             + ",user_age=" + str(df_full["user_age"][d])
              + " "
-             + str(int(datetime.datetime.strptime(df_full["created_at"][d], "%Y-%m-%d %H:%M:%S").timestamp())*1000000000)
-             for d in range(len(df_full))]
+             + str(df_full["time"][d]) for d in range(len(df_full))]
 
     # Export to file
     theImportFile = open(outputfile, 'w')
