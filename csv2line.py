@@ -50,22 +50,6 @@ def convert(dbname, inputfile, outputfile):
   df_full = pd.read_csv(inputfile)
   bar.finish()
 
-  # Measurement
-  bar = progressbar.ProgressBar(maxval=len(df_full), widgets=[progressbar.Bar('=', '[', ']'), 'Measurement ', progressbar.Percentage()])
-  bar.start()
-
-  measurement = []
-  for t in range(len(df_full)):
-    measurement.append('transaction')
-    bar.update(t+1)
-  df_full["measurement"] = measurement
-  bar.finish()
-
-
-  # Processing
-  bar = progressbar.ProgressBar(maxval=len(df_full), widgets=[progressbar.Bar('=', '[', ']'), 'Processing ', progressbar.Percentage()])
-  bar.start()
-
   # Export to file
   theImportFile = open(outputfile, 'w')
   # Write header file
@@ -78,10 +62,14 @@ CREATE DATABASE %s
 
 ''' % (dbname, dbname))
 
-  lines = []
-  for d in range(len(df_full)): 
-    item = str(df_full["measurement"][d]) \
-           + ",brand=" + str(df_full["brand"][d]).replace(" ", "_") \
+  # Measurement
+  bar = progressbar.ProgressBar(maxval=len(df_full), widgets=[progressbar.Bar('=', '[', ']'), 'Processing ', progressbar.Percentage()])
+  bar.start()
+
+  seen = {}
+  for d in range(len(df_full)):
+    bar.update(d+1)
+    item = "transaction,brand=" + str(df_full["brand"][d]).replace(" ", "_") \
            + ",model=" + str(df_full["model"][d]).replace(" ", "_") \
            + ",area=" + str(df_full["area"][d]).replace(" ", "_") \
            + ",user_name=" + str(df_full["user_name"][d]).replace(" ", "_") \
@@ -93,11 +81,9 @@ CREATE DATABASE %s
            + ",user_age=" + str(df_full["user_age"][d]) \
            + " " \
            + str(df_full["time"][d])
-
-    if item not in lines:
-      lines.append(item)
-      theImportFile.write("%s\n" % item)
-    bar.update(d+1)
+    if item in seen: continue
+    theImportFile.write("%s\n" % item)
+    seen[item] = 1
 
   bar.finish()
 
