@@ -25,18 +25,19 @@ influx -import -path=./import.txt -precision=ns
 
 Verify
 ```
-$influx
+$ influx
+
+> drop database retail1
+
+# Delete measurement and series need set data as initial
 > use retail1
 > precision rfc3339
 > select * from transaction limit 3
-```
-
-Delete all measurement
-```
+> #Delete all series data
 > drop series from /.*/
+> #Delete all measurement data
+> drop measurement transaction
 ```
-
-
 
 ---------
 ## NOTE
