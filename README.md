@@ -67,7 +67,9 @@ VMware
 - 4096 MB RAM
 
 Input data.csv (65.3MB - 1048582 rows - 10 cols)
+
 Convert to Line protocol: import.txt (159.4MB) take 300 seconds
+
 Import to InfluxDB take 53 seconds
 
 ![Preview](screenshots/influxdb_import_1milrow.png)
