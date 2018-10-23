@@ -81,8 +81,9 @@ CREATE DATABASE %s
            + ",price=%s" % str(df_full["price"][d]) \
            + ",user_age=%s" % str(df_full["user_age"][d]) \
            + " " \
-           + str(df_full["time"][d])
-           # + str(int(datetime.datetime.strptime(df_full["time"][d], "%Y-%m-%d %H:%M:%S").timestamp())*1000000000)
+           + str(int(datetime.datetime.strptime(df_full["time"][d], "%Y-%m-%d %H:%M:%S").timestamp())*1000000000)
+           # + str(df_full["time"][d])
+
     if item in seen: continue
     theImportFile.write("%s\n" % item)
     seen[item] = 1
