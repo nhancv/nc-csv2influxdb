@@ -6,7 +6,7 @@ import pandas as pd
 import datetime
 
 def main(argv):
-   dbname = 'retail1'
+   dbname = 'import'
    inputfile = 'data.csv'
    outputfile = 'import.txt'
 
@@ -21,7 +21,7 @@ def main(argv):
          print (usage)
          sys.exit()
       elif opt in ("-d", "--db"):
-         dbname = arg
+         dbname = arg.replace(" ", "_")
       elif opt in ("-i", "--ifile"):
          inputfile = arg
       elif opt in ("-o", "--ofile"):
@@ -69,18 +69,20 @@ CREATE DATABASE %s
   seen = {}
   for d in range(len(df_full)):
     bar.update(d+1)
-    item = "transaction,brand=" + str(df_full["brand"][d]).replace(" ", "_") \
-           + ",model=" + str(df_full["model"][d]).replace(" ", "_") \
-           + ",area=" + str(df_full["area"][d]).replace(" ", "_") \
-           + ",user_name=" + str(df_full["user_name"][d]).replace(" ", "_") \
-           + ",user_gender=" + str(df_full["user_gender"][d]).replace(" ", "_") \
+    item = "transaction" \
+           + ",brand=%s" % str(df_full["brand"][d]).replace(" ", "_") \
+           + ",user_gender=%s" % str(df_full["user_gender"][d]).replace(" ", "_") \
            + " " \
-           + "quantity=" + str(df_full["quantity"][d]) \
-           + ",store=" + str(df_full["store"][d]) \
-           + ",price=" + str(df_full["price"][d]) \
-           + ",user_age=" + str(df_full["user_age"][d]) \
+           + "model=\"%s\"" % str(df_full["model"][d]) \
+           + ",area=\"%s\"" % str(df_full["area"][d]) \
+           + ",user_name=\"%s\"" % str(df_full["user_name"][d]) \
+           + ",quantity=%s" % str(df_full["quantity"][d]) \
+           + ",store=%s" % str(df_full["store"][d]) \
+           + ",price=%s" % str(df_full["price"][d]) \
+           + ",user_age=%s" % str(df_full["user_age"][d]) \
            + " " \
            + str(df_full["time"][d])
+           # + str(int(datetime.datetime.strptime(df_full["time"][d], "%Y-%m-%d %H:%M:%S").timestamp())*1000000000)
     if item in seen: continue
     theImportFile.write("%s\n" % item)
     seen[item] = 1
